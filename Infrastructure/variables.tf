@@ -51,3 +51,13 @@ variable "private_subnet_cidrs" {
     "10.0.20.0/24"
   ]
 }
+
+variable "cluster_name" {
+  description = "Name of the EKS cluster."
+  type        = string
+}
+
+variable "kubernetes_version" {
+  description = "Kubernetes version for the EKS cluster."
+  type        = string
+}
