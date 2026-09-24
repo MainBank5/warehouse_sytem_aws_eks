@@ -44,7 +44,7 @@ resource "aws_route_table" "public_rt" {
   vpc_id = aws_vpc.main_vpc.id
 
   tags = {
-    Name = "${var.enterprise_stock_system}-public-rt"
+    Name        = "${var.enterprise_stock_system}-public-rt"
     Environment = var.environment
     ManagedBy   = "Terraform"
   }
@@ -83,7 +83,7 @@ resource "aws_subnet" "private_subnet" {
 }
 
 #two private rt table for two NAT gtw 
-resource "aws_route_table" "private_rt" { 
+resource "aws_route_table" "private_rt" {
   for_each = toset(var.availability_zones)
 
   vpc_id = aws_vpc.main_vpc.id

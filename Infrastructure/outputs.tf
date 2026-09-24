@@ -17,3 +17,9 @@ output "eks_cluster_role_arn" {
   description = "ARN of the IAM role used by the EKS cluster."
   value       = module.iam.eks_cluster_role_arn
 }
+
+output "eks_node_role_arn" {
+  description = "ARN of the IAM role used by EKS worker nodes."
+  value       = module.iam.eks_node_role_arn
+}
+

@@ -61,3 +61,29 @@ variable "kubernetes_version" {
   description = "Kubernetes version for the EKS cluster."
   type        = string
 }
+
+
+variable "node_group_name" {
+  description = "Name of the EKS managed node group."
+  type        = string
+}
+
+variable "node_instance_types" {
+  description = "EC2 instance types used by the node group."
+  type        = list(string)
+}
+
+variable "node_desired_size" {
+  description = "Desired number of worker nodes."
+  type        = number
+}
+
+variable "node_min_size" {
+  description = "Minimum number of worker nodes."
+  type        = number
+}
+
+variable "node_max_size" {
+  description = "Maximum number of worker nodes."
+  type        = number
+}
