@@ -8,3 +8,7 @@ variable "environment" {
   type        = string
 }
 
+variable "aws_account_id" {
+  description = "AWS account ID used by IAM trust policies."
+  type        = string
+}

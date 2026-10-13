@@ -82,7 +82,7 @@ resource "aws_iam_role" "eks_developer" {
         Effect = "Allow"
 
         Principal = {
-          AWS = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"
+          AWS = "arn:aws:iam::${var.aws_account_id}:root"
         }
 
         Action = "sts:AssumeRole"
