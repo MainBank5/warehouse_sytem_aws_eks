@@ -117,6 +117,7 @@ resource "aws_eks_access_entry" "developer" {
   cluster_name  = aws_eks_cluster.main_cluster.name
   principal_arn = var.developer_role_arn
   type          = "STANDARD"
+  kubernetes_groups = ["developers"]  # must match the RoleBinding's subject name
 
   tags = {
     Name        = "${var.cluster_name}-developer-access"
