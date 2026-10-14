@@ -63,3 +63,8 @@ variable "node_max_size" {
   description = "Maximum number of worker nodes."
   type        = number
 }
+
+variable "developer_role_arn" {
+  description = "IAM role ARN granted access to the EKS cluster."
+  type        = string
+}

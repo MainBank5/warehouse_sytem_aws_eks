@@ -3,6 +3,11 @@ resource "aws_eks_cluster" "main_cluster" {
   role_arn = var.cluster_role_arn
   version  = var.kubernetes_version
 
+   access_config {
+    authentication_mode                         = "API_AND_CONFIG_MAP"
+    bootstrap_cluster_creator_admin_permissions = true
+  }
+
   vpc_config {
     subnet_ids = var.private_subnet_ids
 
@@ -107,3 +112,16 @@ resource "aws_eks_node_group" "main_node_group" {
    # aws_eks_node_group.main_node_group
   #]
 #}
+
+resource "aws_eks_access_entry" "developer" {
+  cluster_name  = aws_eks_cluster.main_cluster.name
+  principal_arn = var.developer_role_arn
+  type          = "STANDARD"
+
+  tags = {
+    Name        = "${var.cluster_name}-developer-access"
+    Environment = var.environment
+    ManagedBy   = "Terraform"
+    Project     = var.enterprise_stock_system
+  }
+}

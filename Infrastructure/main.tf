@@ -40,6 +40,7 @@ module "eks" {
 
   enterprise_stock_system = var.enterprise_stock_system
   environment             = var.environment
+  developer_role_arn      = module.iam.eks_developer_role_arn
 
   depends_on = [module.iam]
 }
