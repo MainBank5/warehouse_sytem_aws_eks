@@ -3,5 +3,6 @@
    kind: Kustomization
    resources:
      - namespaces/enterprise-stock-system.yaml
+     - serviceaccounts/stock-api.yaml
      - rbac/developer-role.yaml
      - rbac/developer-rolebinding.yaml
