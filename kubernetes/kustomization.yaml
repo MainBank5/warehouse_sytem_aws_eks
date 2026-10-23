@@ -6,3 +6,5 @@
      - serviceaccounts/stock-api.yaml
      - rbac/developer-role.yaml
      - rbac/developer-rolebinding.yaml
+     - rbac/stock-api-role.yaml
+     - rbac/stock-api-rolebinding.yaml

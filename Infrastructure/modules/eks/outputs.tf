@@ -17,3 +17,8 @@ output "cluster_certificate_authority_data" {
   description = "Certificate authority data for the Kubernetes API server."
   value       = aws_eks_cluster.main_cluster.certificate_authority[0].data
 }
+
+output "cluster_oidc_issuer_url" {
+  description = "OIDC issuer URL for the EKS cluster."
+  value       = aws_eks_cluster.main_cluster.identity[0].oidc[0].issuer
+}

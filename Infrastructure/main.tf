@@ -45,4 +45,31 @@ module "eks" {
   depends_on = [module.iam]
 }
 
+resource "aws_iam_openid_connect_provider" "eks" {
+  url = module.eks.cluster_oidc_issuer_url
 
+
+  client_id_list = [
+    "sts.amazonaws.com"
+  ]
+
+  tags = {
+    Name        = "${var.enterprise_stock_system}-eks-oidc-provider"
+    Environment = var.environment
+    ManagedBy   = "Terraform"
+  }
+}
+
+
+module "irsa" {
+  source = "./modules/irsa"
+
+  enterprise_stock_system = var.enterprise_stock_system
+  environment             = var.environment
+
+  oidc_provider_arn = aws_iam_openid_connect_provider.eks.arn
+  oidc_issuer_url   = module.eks.cluster_oidc_issuer_url
+
+  namespace            = "enterprise-stock-system"
+  service_account_name = "email-service"
+}

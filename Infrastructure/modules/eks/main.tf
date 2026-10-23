@@ -3,7 +3,7 @@ resource "aws_eks_cluster" "main_cluster" {
   role_arn = var.cluster_role_arn
   version  = var.kubernetes_version
 
-   access_config {
+  access_config {
     authentication_mode                         = "API_AND_CONFIG_MAP"
     bootstrap_cluster_creator_admin_permissions = true
   }
@@ -57,67 +57,67 @@ resource "aws_eks_node_group" "main_node_group" {
 
 
 #resource "aws_eks_addon" "vpc_cni" {
-  #cluster_name  = aws_eks_cluster.main_cluster.name
-  #addon_name    = "vpc-cni"
-  #addon_version = "v1.20.4-eksbuild.2" #There is already a self-managed VPC CNI installation. If there are conflicting settings, overwrite them with the managed add-on configuration.
+#cluster_name  = aws_eks_cluster.main_cluster.name
+#addon_name    = "vpc-cni"
+#addon_version = "v1.20.4-eksbuild.2" #There is already a self-managed VPC CNI installation. If there are conflicting settings, overwrite them with the managed add-on configuration.
 
-  #resolve_conflicts_on_create = "OVERWRITE"
+#resolve_conflicts_on_create = "OVERWRITE"
 
-  #tags = {
-    #Name        = "${var.cluster_name}-vpc-cni"
-    #Environment = var.environment
-    #ManagedBy   = "Terraform"
-    #Project     = var.enterprise_stock_system
-  #}
+#tags = {
+#Name        = "${var.cluster_name}-vpc-cni"
+#Environment = var.environment
+#ManagedBy   = "Terraform"
+#Project     = var.enterprise_stock_system
+#}
 
-  #depends_on = [
-    #aws_eks_node_group.main_node_group
-  #]
+#depends_on = [
+#aws_eks_node_group.main_node_group
+#]
 #}
 
 #resource "aws_eks_addon" "coredns" {
-  #cluster_name  = aws_eks_cluster.main_cluster.name
-  #addon_name    = "coredns"
-  #addon_version = "v1.14.3-eksbuild.16"
+#cluster_name  = aws_eks_cluster.main_cluster.name
+#addon_name    = "coredns"
+#addon_version = "v1.14.3-eksbuild.16"
 
-  #resolve_conflicts_on_create = "OVERWRITE"
+#resolve_conflicts_on_create = "OVERWRITE"
 
-  #tags = {
-    #Name        = "${var.cluster_name}-coredns"
-    #Environment = var.environment
-    #ManagedBy   = "Terraform"
-    #Project     = var.enterprise_stock_system
-  #}
+#tags = {
+#Name        = "${var.cluster_name}-coredns"
+#Environment = var.environment
+#ManagedBy   = "Terraform"
+#Project     = var.enterprise_stock_system
+#}
 
-  #depends_on = [
-   # aws_eks_node_group.main_node_group
-  #]
+#depends_on = [
+# aws_eks_node_group.main_node_group
+#]
 #}
 
 #resource "aws_eks_addon" "kube_proxy" {
-  #cluster_name  = aws_eks_cluster.main_cluster.name
-  #addon_name    = "kube-proxy"
-  #addon_version = "v1.36.0-eksbuild.21"
+#cluster_name  = aws_eks_cluster.main_cluster.name
+#addon_name    = "kube-proxy"
+#addon_version = "v1.36.0-eksbuild.21"
 
-  #resolve_conflicts_on_create = "OVERWRITE"
+#resolve_conflicts_on_create = "OVERWRITE"
 
-  #tags = {
-    #Name        = "${var.cluster_name}-kube-proxy"
-    #Environment = var.environment
-    #ManagedBy   = "Terraform"
-    #Project     = var.enterprise_stock_system
-  #}
+#tags = {
+#Name        = "${var.cluster_name}-kube-proxy"
+#Environment = var.environment
+#ManagedBy   = "Terraform"
+#Project     = var.enterprise_stock_system
+#}
 
-  #depends_on = [
-   # aws_eks_node_group.main_node_group
-  #]
+#depends_on = [
+# aws_eks_node_group.main_node_group
+#]
 #}
 
 resource "aws_eks_access_entry" "developer" {
-  cluster_name  = aws_eks_cluster.main_cluster.name
-  principal_arn = var.developer_role_arn
-  type          = "STANDARD"
-  kubernetes_groups = ["developers"]  # must match the RoleBinding's subject name
+  cluster_name      = aws_eks_cluster.main_cluster.name
+  principal_arn     = var.developer_role_arn
+  type              = "STANDARD"
+  kubernetes_groups = ["developers"] # must match the RoleBinding's subject name
 
   tags = {
     Name        = "${var.cluster_name}-developer-access"
