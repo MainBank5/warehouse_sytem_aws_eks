@@ -29,7 +29,7 @@ data "aws_iam_policy_document" "assume_role" {
 }
 
 resource "aws_iam_role" "email_service" {
-  name               = "${var.enterprise_stock_system}-email-service-irsa-role"
+  name               = "${var.enterprise_stock_system}-email-service-irsa-role" #use the arn from here in email-service service account yaml file. 
   assume_role_policy = data.aws_iam_policy_document.assume_role.json
 
   tags = {

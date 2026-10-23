@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: email-service
+  namespace: enterprise-stock-system
+  labels:
+    app.kubernetes.io/name: email-service
+    app.kubernetes.io/part-of: enterprise-stock-system
+  annotations:
+    eks.amazonaws.com/role-arn: "arn:aws:iam::000000000000:role/enterprise-stock-system-email-service-irsa-role"
