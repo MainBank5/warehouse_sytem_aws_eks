@@ -4,7 +4,7 @@ data "aws_iam_policy_document" "resend_smtp_secret" {
     effect  = "Allow"
     actions = ["secretsmanager:GetSecretValue"]
     resources = [
-      "arn:aws:secretsmanager:us-east-1:000000000000:secret:enterprise-stock-system/resend-smtp-C1KGYX"
+      "arn:aws:secretsmanager:us-east-1:000000000000:secret:enterprise-stock-system/resend-smtp*"
     ]
   }
 }
