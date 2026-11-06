@@ -48,7 +48,6 @@ module "eks" {
 resource "aws_iam_openid_connect_provider" "eks" {
   url = module.eks.cluster_oidc_issuer_url
 
-
   client_id_list = [
     "sts.amazonaws.com"
   ]
@@ -72,4 +71,32 @@ module "irsa" {
 
   namespace            = "enterprise-stock-system"
   service_account_name = "email-service"
+
+  secret_arn = data.aws_secretsmanager_secret.resend_smtp.arn
+}
+
+module "pod_identity" {
+  source = "./modules/pod-identity"
+
+  enterprise_stock_system = var.enterprise_stock_system
+  environment             = var.environment
+
+  cluster_name = module.eks.cluster_name
+
+  namespace            = "enterprise-stock-system"
+  service_account_name = "email-service-pod-identity"
+
+  secret_arn = data.aws_secretsmanager_secret.resend_smtp.arn
+}
+
+resource "aws_eks_pod_identity_association" "email_service" {
+  cluster_name    = module.eks.cluster_name
+  namespace       = "enterprise-stock-system"
+  service_account = "email-service-pod-identity"
+  role_arn        = module.pod_identity.email_service_role_arn
+
+  depends_on = [
+    module.eks.pod_identity_agent_addon_id,
+    module.pod_identity
+  ]
 }

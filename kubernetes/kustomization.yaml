@@ -9,3 +9,4 @@
      - rbac/developer-rolebinding.yaml
      - rbac/stock-api-role.yaml
      - rbac/stock-api-rolebinding.yaml
+     - serviceaccounts/email-service-pod-identity.yaml

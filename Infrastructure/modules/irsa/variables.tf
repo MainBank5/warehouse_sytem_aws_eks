@@ -29,3 +29,8 @@ variable "service_account_name" {
   type        = string
   default     = "email-service"
 }
+
+variable "secret_arn" {
+  description = "ARN of the Secrets Manager secret the email service may read."
+  type        = string
+}

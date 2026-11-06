@@ -1,11 +1,9 @@
 data "aws_iam_policy_document" "resend_smtp_secret" {
   statement {
-    sid     = "ReadResendSmtpSecret"
-    effect  = "Allow"
-    actions = ["secretsmanager:GetSecretValue"]
-    resources = [
-      "arn:aws:secretsmanager:us-east-1:000000000000:secret:enterprise-stock-system/resend-smtp*"
-    ]
+    sid       = "ReadResendSmtpSecret"
+    effect    = "Allow"
+    actions   = ["secretsmanager:GetSecretValue"]
+    resources = [var.secret_arn]
   }
 }
 

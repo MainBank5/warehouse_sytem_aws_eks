@@ -1,7 +1,7 @@
 data "aws_iam_policy_document" "assume_role" {
   statement {
-    sid     = "AllowEksPodIdentity"
-    effect  = "Allow"
+    sid    = "AllowEksPodIdentity"
+    effect = "Allow"
     actions = [
       "sts:AssumeRole",
       "sts:TagSession"
@@ -26,7 +26,7 @@ data "aws_iam_policy_document" "assume_role" {
 
     condition {
       test     = "StringEquals"
-      variable = "aws:RequestTag/kubernetes-cluster-name"
+      variable = "aws:RequestTag/eks-cluster-name"
       values   = [var.cluster_name]
     }
   }

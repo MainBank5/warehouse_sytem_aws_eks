@@ -126,3 +126,15 @@ resource "aws_eks_access_entry" "developer" {
     Project     = var.enterprise_stock_system
   }
 }
+
+#runs as a DaemonSet on eligible worker nodes and is required for Pods to obtain their Pod Identity credentials
+resource "aws_eks_addon" "pod_identity_agent" {
+  cluster_name = aws_eks_cluster.main_cluster.name
+  addon_name   = "eks-pod-identity-agent"
+
+  tags = {
+    Name        = "${var.enterprise_stock_system}-pod-identity-agent"
+    Environment = var.environment
+    ManagedBy   = "Terraform"
+  }
+}

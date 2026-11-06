@@ -22,3 +22,8 @@ output "cluster_oidc_issuer_url" {
   description = "OIDC issuer URL for the EKS cluster."
   value       = aws_eks_cluster.main_cluster.identity[0].oidc[0].issuer
 }
+
+output "pod_identity_agent_addon_id" {
+  description = "ID of the EKS Pod Identity Agent add-on."
+  value       = aws_eks_addon.pod_identity_agent.id
+}
