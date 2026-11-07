@@ -6,11 +6,16 @@ resource "helm_release" "external_secrets" {
 
   namespace        = "external-secrets"
   create_namespace = true
+  timeout          = 900
 
   set = [
     {
       name  = "installCRDs"
       value = "true"
+    },
+    {
+      name  = "serviceAccount.name"
+      value = "external-secrets"
     }
   ]
 }
